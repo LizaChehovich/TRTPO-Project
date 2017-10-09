@@ -8,7 +8,14 @@
 ### 2.1 Программые интерфейсы
 Приложение обрабатывает RSS-ленты интернет-ресурсов, соответствующие стандартам RSS 1.0 и 2.0. 
 ### 2.2 Интерфейс пользователя
-Иллюстрации представлены в папке [Mockups](https://github.com/LizaChehovich/TRTPO-Project/tree/master/Mockups).
+Окно входа в приложение.
+![Окно входа в приложение](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/ApplicationLoginWindow.PNG)
+Главное окно приложения.
+![Главное окно приложения](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/MainWindow1.PNG)
+Главное окно приложения после выбора новости в таблице.
+![Главное окно приложения после выбора новости в таблице](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/MainWindow2.PNG)
+Окно настройки профиля пользователя.
+![Окно настройки профиля пользователя](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/SettingUpAUserProfile.PNG)
 ### 2.3 Характеристики пользователей
 #### 2.3.1 Целевая аудитория
 Люди старшей возрастной категории со средним или выше среднего уровнем образования, обладающие минимальной технической грамотностью.
