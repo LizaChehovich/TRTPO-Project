@@ -78,13 +78,15 @@
 <a name="user_interface"/>
 
 ## 2.2 Интерфейс пользователя
-Окно входа в приложение.
-![Окно входа в приложение](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/ApplicationLoginWindow.PNG)
-Главное окно приложения.
-![Главное окно приложения](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/MainWindow1.PNG)
-Главное окно приложения после выбора новости в таблице.
-![Главное окно приложения после выбора новости в таблице](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/MainWindow2.PNG)
-Окно настройки профиля пользователя.
+Окно входа в приложение.  
+![Окно входа в приложение](../Mockups/ApplicationLoginWindow.PNG)  
+Главное окно приложения (пользователь зарегестрирован).  
+![Главное окно приложения](../Mockups/MainWindow1.PNG)  
+Главное окно приложения после выбора новости в таблице (пользователь зарегестрирован).  
+![Главное окно приложения после выбора новости в таблице](../Mockups/MainWindow2.PNG)  
+Главное окно приложения после выбора новости в таблице (анонимный пользователь).  
+![Главное окно приложения после выбора новости в таблице](../Mockups/MainWindowAnonymousUser.PNG)  
+Окно настройки профиля пользователя.  
 ![Окно настройки профиля пользователя](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/SettingUpAUserProfile.PNG)
 
 <a name="user_specifications"/>
