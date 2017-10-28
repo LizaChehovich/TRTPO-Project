@@ -80,15 +80,21 @@
 
 ## 2.2 Интерфейс пользователя
 Окно входа в приложение.  
-![Окно входа в приложение](../Mockups/ApplicationLoginWindow.PNG)  
+![Окно входа в приложение](../Images/Mockups/ApplicationLoginWindow.PNG)  
+Окно регистрации нового пользователя.  
+![Окно регистрации нового пользователя](../Images/Mockups/RegistrationWindow1.PNG)  
+Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении.  
+![Окно регистрации нового пользователя после ввода имени, уже зарегистрированного в приложении](../Images/Mockups/RegistrationWindow2.PNG)  
+Окно входа для зарегистрированного пользователя.  
+![Окно входа для зарегистрированного пользователя](../Images/Mockups/LoginScreenForTheRegisteredUser.PNG)  
 Главное окно приложения (пользователь зарегестрирован).  
-![Главное окно приложения](../Mockups/MainWindow1.PNG)  
+![Главное окно приложения](../Images/Mockups/MainWindow1.PNG)  
 Главное окно приложения после выбора новости в таблице (пользователь зарегестрирован).  
-![Главное окно приложения после выбора новости в таблице](../Mockups/MainWindow2.PNG)  
+![Главное окно приложения после выбора новости в таблице](../Images/Mockups/MainWindow2.PNG)  
 Главное окно приложения после выбора новости в таблице (анонимный пользователь).  
-![Главное окно приложения после выбора новости в таблице](../Mockups/MainWindowAnonymousUser.PNG)  
+![Главное окно приложения после выбора новости в таблице](../Images/Mockups/MainWindowAnonymousUser.PNG)  
 Окно настройки профиля пользователя.  
-![Окно настройки профиля пользователя](https://github.com/LizaChehovich/TRTPO-Project/blob/master/Mockups/SettingUpAUserProfile.PNG)
+![Окно настройки профиля пользователя](../Images/Mockups/SettingUpAUserProfile.PNG)
 
 <a name="user_specifications"/>
 
