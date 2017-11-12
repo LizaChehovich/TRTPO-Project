@@ -8,7 +8,7 @@
 <a name="reg"/>
 
 # 1 Зарегистрироваться
-![Зарегистрироваться](../../../Images/System%20design/Registration(sq).png)
+![Зарегистрироваться](../../../Images/System%20design/Registration(sq).jpg)
 
 <a name="login"/>
 
