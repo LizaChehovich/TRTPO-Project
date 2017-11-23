@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<profile>
+  <resourses>
+    <resourse>qwe</resourse>
+    <resourse>asd</resourse>
+    <resourse>zxc</resourse>
+  </resourses>
+  <incudeFilters>
+    <includeFilter>wer</includeFilter>
+    <includeFilter>sdf</includeFilter>
+    <includeFilter>xcv</includeFilter>
+  </incudeFilters>
+  <incudeFilters>
+    <excludeFilter>ert</excludeFilter>
+    <excludeFilter>dfg</excludeFilter>
+    <excludeFilter>cvb</excludeFilter>
+  </incudeFilters>
+</profile>
