@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using RSS_Reader.Model;
 
@@ -11,19 +12,16 @@ namespace RSS_Reader.Controller
         private readonly string[] _resourcesParameters = {@"resources", @"resource"};
         private readonly string[] _includesParameters = {@"includes", @"include"};
         private readonly string[] _excludesParameters = {@"exclude", @"exclude"};
-        private readonly string _relativeAddress = @"..\..\Users";
+        private readonly string _relativeAddress = @"..\..\Users\";
         private readonly string _fileExtension = @".xml";
 
         public List<string> GetUserNameList()
         {
-            List<string> userNameList = new List<string>();
-            foreach (var filePath in Directory.GetFiles(_relativeAddress, @"*" + _fileExtension))
-            {
-                var fileName = Path.GetFileName(filePath);
-                if(fileName.Equals("Anonym.xml")) continue;
-                userNameList.Add(fileName.Remove(fileName.Length - 4));
-            }
-            return userNameList;
+            return (from filePath in Directory.GetFiles(_relativeAddress, @"*" + _fileExtension)
+                select Path.GetFileName(filePath)
+                into fileName
+                where !fileName.Equals("Anonym.xml")
+                select fileName.Remove(fileName.Length - 4)).ToList();
         }
 
         public Profile GetUserProfile(string userName)
@@ -56,13 +54,11 @@ namespace RSS_Reader.Controller
 
         private List<string> XElementToInformationList(string rootName, string[] parameters, XDocument xDocument)
         {
-            var informationList = new List<string>();
-            foreach (var informationElement in xDocument.Elements(rootName).Elements(parameters[0])
-                .Elements(parameters[1]))
-            {
-                informationList.Add(informationElement.Value);
-            }
-            return informationList;
+            return xDocument.Elements(rootName)
+                .Elements(parameters[0])
+                .Elements(parameters[1])
+                .Select(informationElement => informationElement.Value)
+                .ToList();
         }
 
         private string GetPathToFile(string fileName)
