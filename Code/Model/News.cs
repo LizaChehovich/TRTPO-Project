@@ -1,6 +1,6 @@
 ﻿namespace RSS_Reader.Model
 {
-    class News
+    public class News
     {
         public string Title { get; set; }
         public string Link { get; set; }

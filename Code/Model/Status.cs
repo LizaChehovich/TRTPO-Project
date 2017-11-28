@@ -1,6 +1,6 @@
 ﻿namespace RSS_Reader.Model
 {
-    enum Status
+    public enum Status
     {
         Indefined,
         Registered,
