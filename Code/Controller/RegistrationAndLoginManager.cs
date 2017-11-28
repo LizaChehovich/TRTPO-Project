@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RSS_Reader.Model;
 
 namespace RSS_Reader.Controller
@@ -14,7 +15,7 @@ namespace RSS_Reader.Controller
 
         public User RegisterUser(string userName)
         {
-            if (NameIsBusy(userName)) return null;
+            if (NameIsBusy(userName)) throw new ArgumentException();
             var user = new User
             {
                 Name = userName,
@@ -27,10 +28,20 @@ namespace RSS_Reader.Controller
 
         public User LogIn(string userName)
         {
+            return GetUser(userName, Status.Registered);
+        }
+
+        public User GetAnonymUser()
+        {
+            return GetUser(Status.Anonym.ToString(), Status.Anonym);
+        }
+
+        private User GetUser(string userName, Status status)
+        {
             return new User
             {
                 Name = userName,
-                Status = Status.Registered,
+                Status = status,
                 Profile = _profileFileManager.GetUserProfile(userName)
             };
         }
