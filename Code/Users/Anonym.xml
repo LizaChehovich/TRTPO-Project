@@ -1,18 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <profile>
-  <resourses>
-    <resourse>qwe</resourse>
-    <resourse>asd</resourse>
-    <resourse>zxc</resourse>
-  </resourses>
-  <incudeFilters>
-    <includeFilter>wer</includeFilter>
-    <includeFilter>sdf</includeFilter>
-    <includeFilter>xcv</includeFilter>
-  </incudeFilters>
-  <incudeFilters>
-    <excludeFilter>ert</excludeFilter>
-    <excludeFilter>dfg</excludeFilter>
-    <excludeFilter>cvb</excludeFilter>
-  </incudeFilters>
+  <resources>
+    <resource>http://megacat.by/rss-1</resource>
+    <resource>http://megacat.by/rss-155</resource>
+    <resource>http://megacat.by/rss-12</resource>
+    <resource>https://news.tut.by/rss/index.rss</resource>
+  </resources>
+  <includes />
+  <exclude />
 </profile>
