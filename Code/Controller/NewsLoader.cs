@@ -20,19 +20,11 @@ namespace RSS_Reader.Controller
         private Filtrator _filtrator;
         private readonly Regex _descriptionRegex = new Regex("\\<.*?\\>");
         private readonly Regex _versionRegex = new Regex("(?<=version=\")(.{1})");
-        private IRssVersion _rssVersion;
+        private RssVersion _rssVersion;
 
         private void ChangeRssVersion(int version)
         {
-            switch (version)
-            {
-                case 1:
-                    _rssVersion = new RssVersion1();
-                    break;
-                default:
-                    _rssVersion = new RssVersion2();
-                    break;
-            }
+            _rssVersion = RssVersion.GetVersion(version);
         }
 
         public void UpdateUserProfile(Profile userProfile)

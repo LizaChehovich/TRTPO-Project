@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<profile>
+  <resources>
+    <resource>http://megacat.by/rss-1</resource>
+    <resource>http://megacat.by/rss-155</resource>
+    <resource>http://megacat.by/rss-12</resource>
+    <resource>https://news.tut.by/rss/index.rss</resource>
+  </resources>
+  <includes />
+  <exclude />
+</profile>

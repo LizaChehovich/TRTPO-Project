@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Controller\FileManager.cs" />
     <Compile Include="Controller\Filtrator.cs" />
-    <Compile Include="Controller\IRssVersion.cs" />
+    <Compile Include="Controller\RssVersion.cs" />
     <Compile Include="Controller\NewsLoader.cs" />
     <Compile Include="Controller\RegistrationAndLoginManager.cs" />
     <Compile Include="Controller\RssVersion1.cs" />

@@ -2,8 +2,8 @@
 
 namespace RSS_Reader.Controller
 {
-    class RssVersion1: IRssVersion
+    class RssVersion1: RssVersion
     {
-        XmlNode IRssVersion.GetNode(XmlDocument rss) => rss?.ChildNodes[1]?.FirstChild;
+        public override XmlNode GetNode(XmlDocument rss) => rss?.ChildNodes[1]?.FirstChild;
     }
 }
