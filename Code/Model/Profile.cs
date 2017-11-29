@@ -34,8 +34,7 @@ namespace RSS_Reader.Model
 
         public bool AddIncludeFilter(string includeFilter)
         {
-            if (_includeFiltersList.Exists(x => x.Equals(includeFilter)) ||
-                _excludeFiltersList.Exists(x => x.Equals(includeFilter))) return false;
+            if (FilterExist(includeFilter)) return false;
             _includeFiltersList.Add(includeFilter);
             return true;
         }
@@ -55,8 +54,7 @@ namespace RSS_Reader.Model
 
         public bool AddExcludeFilter(string excludeFilter)
         {
-            if (_includeFiltersList.Exists(x => x.Equals(excludeFilter)) ||
-                _excludeFiltersList.Exists(x => x.Equals(excludeFilter))) return false;
+            if (FilterExist(excludeFilter)) return false;
             _excludeFiltersList.Add(excludeFilter);
             return true;
         }
@@ -73,5 +71,8 @@ namespace RSS_Reader.Model
         {
             _excludeFiltersList.Remove(excludeFilter);
         }
+
+        private bool FilterExist(string filter) => _includeFiltersList.Exists(x => x.Equals(filter)) ||
+                                                   _excludeFiltersList.Exists(x => x.Equals(filter));
     }
 }
