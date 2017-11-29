@@ -16,9 +16,9 @@ namespace RSS_Reader.View
         public SettingsWindow(Profile profile)
         {
             InitializeComponent();
-            profile.AddResources(profile.ResourcesList);
-            profile.AddIncludeFilters(profile.IncludeFiltersList);
-            profile.AddExcludeFilters(profile.ExcludeFiltersList);
+            _profile.AddResources(profile.ResourcesList);
+            _profile.AddIncludeFilters(profile.IncludeFiltersList);
+            _profile.AddExcludeFilters(profile.ExcludeFiltersList);
             DialogResult = DialogResult.Abort;
             UpdateExcludes();
             UpdateIncludes();
