@@ -16,7 +16,7 @@ namespace RSS_Reader.Controller
         public User RegisterUser(string userName)
         {
             if (NameIsBusy(userName)) throw new ArgumentException();
-            var user = new User(userName,Status.Registered,_profileFileManager.GetUserProfile(Status.Anonym.ToString()));
+            var user = GetUser(userName,Status.Registered,Status.Anonym.ToString());
             _profileFileManager.SaveUserProfile(user);
             return user;
         }
@@ -31,9 +31,9 @@ namespace RSS_Reader.Controller
             return GetUser(Status.Anonym.ToString(), Status.Anonym);
         }
 
-        private User GetUser(string userName, Status status)
+        private User GetUser(string userName, Status status, string fileName = null)
         {
-            return new User(userName, status, _profileFileManager.GetUserProfile(userName));
+            return new User(userName, status, _profileFileManager.GetUserProfile(fileName ?? userName));
         }
 
         private bool NameIsBusy(string name)
