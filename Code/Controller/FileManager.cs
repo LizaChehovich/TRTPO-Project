@@ -21,7 +21,7 @@ namespace RSS_Reader.Controller
                 select Path.GetFileName(filePath)
                 into fileName
                 where !fileName.Equals("Anonym.xml")
-                select fileName.Remove(fileName.Length - 4)).ToList();
+                select fileName.Remove(fileName.Length - _fileExtension.Length)).ToList();
         }
 
         public Profile GetUserProfile(string userName)

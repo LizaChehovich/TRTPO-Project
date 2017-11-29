@@ -1,6 +1,4 @@
-﻿using System.Deployment.Application;
-
-namespace RSS_Reader.Model
+﻿namespace RSS_Reader.Model
 {
     public class User
     {

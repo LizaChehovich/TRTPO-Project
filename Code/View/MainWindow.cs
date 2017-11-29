@@ -11,11 +11,13 @@ namespace RSS_Reader.View
 {
     public partial class MainWindow : Form
     {
-        private User _user;
+        private readonly User _user;
         private readonly NewsLoader _loader = new NewsLoader();
         private Thread _loaderThread;
         private bool _updateIsEnable = true;
         private List<News> _newsList;
+
+        private const int UpdateInterval = 900000;
 
         public MainWindow(User user)
         {
@@ -42,7 +44,7 @@ namespace RSS_Reader.View
 
         private void InitializeTimer()
         {
-            tmUpdate.Interval = 900000;
+            tmUpdate.Interval = UpdateInterval;
             tmUpdate.Tick += StartLoading;
             tmUpdate.Start();
         }
@@ -69,8 +71,7 @@ namespace RSS_Reader.View
                 ClearInformation();
                 foreach (var news in _newsList)
                 {
-                    dgvNews.Rows.Add(new object[]
-                        {news.Category, news.Title, news.Description, news.PublicationDate, news.Link});
+                    dgvNews.Rows.Add(news.Category, news.Title, news.Description, news.PublicationDate, news.Link);
                 }
                 _updateIsEnable = true;
                 _loaderThread?.Abort();
