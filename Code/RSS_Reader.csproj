@@ -57,6 +57,12 @@
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\Status.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="View\DataEntryWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\DataEntryWindow.Designer.cs">
+      <DependentUpon>DataEntryWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\DataEntryWindow.resx">
+      <DependentUpon>DataEntryWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </EmbeddedResource>

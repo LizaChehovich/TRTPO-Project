@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 using RSS_Reader.Model;
 
 namespace RSS_Reader.View
@@ -12,6 +10,8 @@ namespace RSS_Reader.View
         public event ProfileReadyHandler ProfileReady;
 
         private readonly Profile _profile = new Profile();
+
+        public string Result { get; set; }
 
         public SettingsWindow(Profile profile)
         {
@@ -61,25 +61,24 @@ namespace RSS_Reader.View
 
         private void btAddRes_Click(object sender, System.EventArgs e)
         {
-            var resource = Interaction.InputBox(@"Введите адрес ресурса");
-            if(resource.Trim().Equals(string.Empty))
+            var dataEntryWindow = new DataEntryWindow {Owner = this};
+            if(dataEntryWindow.ShowDialog()==DialogResult.Abort) return;
+            if (!_profile.AddResource(Result))
             {
-                ShowMessage(@"Недопустимый адрес");
-            }
-            else if (_profile.AddResource(resource))
-            {
-                UpdateResources();
+                ShowMessage(@"Такой ресурс уже есть");
             }
             else
             {
-                ShowMessage(@"Такой адрес уже есть");
+                UpdateResources();
             }
         }
 
         private void btRemRes_Click(object sender, System.EventArgs e)
         {
             if (lbResourses.SelectedIndex == -1)
+            {
                 ShowMessage(@"Выберите ресурс из списка");
+            }
             else
             {
                 _profile.RemoveResourse(_profile.ResourcesList.ElementAt(lbResourses.SelectedIndex));
@@ -89,14 +88,24 @@ namespace RSS_Reader.View
 
         private void btAddInc_Click(object sender, System.EventArgs e)
         {
-
-            UpdateIncludes();
+            var dataEntryWindow = new DataEntryWindow { Owner = this };
+            if (dataEntryWindow.ShowDialog() == DialogResult.Abort) return;
+            if (!_profile.AddIncludeFilter(Result))
+            {
+                ShowMessage(@"Такой фильтр уже есть");
+            }
+            else
+            {
+                UpdateIncludes();
+            }
         }
 
         private void btRemInc_Click(object sender, System.EventArgs e)
         {
             if (lbInclude.SelectedIndex == -1)
+            {
                 ShowMessage(@"Выберите фильтр из списка");
+            }
             else
             {
                 _profile.RemoveIncludeFilter(_profile.IncludeFiltersList.ElementAt(lbInclude.SelectedIndex));
@@ -106,14 +115,24 @@ namespace RSS_Reader.View
 
         private void btAddExc_Click(object sender, System.EventArgs e)
         {
-
-            UpdateExcludes();
+            var dataEntryWindow = new DataEntryWindow { Owner = this };
+            if (dataEntryWindow.ShowDialog() == DialogResult.Abort) return;
+            if (!_profile.AddExcludeFilter(Result))
+            {
+                ShowMessage(@"Такой фильтр уже есть");
+            }
+            else
+            {
+                UpdateExcludes();
+            }
         }
 
         private void btRemExc_Click(object sender, System.EventArgs e)
         {
             if (lbExclude.SelectedIndex == -1)
+            {
                 ShowMessage(@"Выберите фильтр из списка");
+            }
             else
             {
                 _profile.RemoveExcludeFilter(_profile.ExcludeFiltersList.ElementAt(lbExclude.SelectedIndex));
