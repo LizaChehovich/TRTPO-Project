@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
-using RSS_Reader.Controller;
 using RSS_Reader.Model;
 
 namespace RSS_Reader.View
@@ -11,12 +11,14 @@ namespace RSS_Reader.View
         public delegate void ProfileReadyHandler(Profile profile);
         public event ProfileReadyHandler ProfileReady;
 
-        private readonly ProfileManager _manager;
+        private readonly Profile _profile = new Profile();
 
         public SettingsWindow(Profile profile)
         {
             InitializeComponent();
-            _manager = new ProfileManager(profile);
+            profile.AddResources(profile.ResourcesList);
+            profile.AddIncludeFilters(profile.IncludeFiltersList);
+            profile.AddExcludeFilters(profile.ExcludeFiltersList);
             DialogResult = DialogResult.Abort;
             UpdateExcludes();
             UpdateIncludes();
@@ -33,19 +35,19 @@ namespace RSS_Reader.View
         private void UpdateResources()
         {
             lbResourses.Items.Clear();
-            lbResourses.Items.AddRange(_manager.Profile.ResourcesList.ToArray());
+            lbResourses.Items.AddRange(_profile.ResourcesList.ToArray());
         }
 
         private void UpdateIncludes()
         {
             lbInclude.Items.Clear();
-            lbInclude.Items.AddRange(_manager.Profile.IncludeFiltersList.ToArray());
+            lbInclude.Items.AddRange(_profile.IncludeFiltersList.ToArray());
         }
 
         private void UpdateExcludes()
         {
             lbExclude.Items.Clear();
-            lbExclude.Items.AddRange(_manager.Profile.ExcludeFiltersList.ToArray());
+            lbExclude.Items.AddRange(_profile.ExcludeFiltersList.ToArray());
         }
 
         private void HelpToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -56,7 +58,7 @@ namespace RSS_Reader.View
         private void btOK_Click(object sender, System.EventArgs e)
         {
             DialogResult = DialogResult.OK;
-            ProfileReady?.Invoke(_manager.Profile);
+            ProfileReady?.Invoke(_profile);
             Close();
         }
 
@@ -72,7 +74,7 @@ namespace RSS_Reader.View
             {
                 ShowMessage(@"Недопустимый адрес");
             }
-            else if (_manager.AddResource(resource))
+            else if (_profile.AddResource(resource))
             {
                 UpdateResources();
             }
@@ -84,11 +86,11 @@ namespace RSS_Reader.View
 
         private void btRemRes_Click(object sender, System.EventArgs e)
         {
-            if (lbResourses.SelectedIndex == 1)
+            if (lbResourses.SelectedIndex == -1)
                 ShowMessage(@"Выберите ресурс из списка");
             else
             {
-                _manager.RemoveResource(_manager.Profile.ResourcesList[lbResourses.SelectedIndex]);
+                _profile.RemoveResourse(_profile.ResourcesList.ElementAt(lbResourses.SelectedIndex));
                 UpdateResources();
             }
         }
@@ -101,11 +103,11 @@ namespace RSS_Reader.View
 
         private void btRemInc_Click(object sender, System.EventArgs e)
         {
-            if (lbInclude.SelectedIndex == 1)
+            if (lbInclude.SelectedIndex == -1)
                 ShowMessage(@"Выберите фильтр из списка");
             else
             {
-                _manager.RemoveIncludeFilter(_manager.Profile.IncludeFiltersList[lbInclude.SelectedIndex]);
+                _profile.RemoveIncludeFilter(_profile.IncludeFiltersList.ElementAt(lbInclude.SelectedIndex));
                 UpdateIncludes();
             }
         }
@@ -118,11 +120,11 @@ namespace RSS_Reader.View
 
         private void btRemExc_Click(object sender, System.EventArgs e)
         {
-            if (lbExclude.SelectedIndex == 1)
+            if (lbExclude.SelectedIndex == -1)
                 ShowMessage(@"Выберите фильтр из списка");
             else
             {
-                _manager.RemoveExcludeFilter(_manager.Profile.ExcludeFiltersList[lbExclude.SelectedIndex]);
+                _profile.RemoveExcludeFilter(_profile.ExcludeFiltersList.ElementAt(lbExclude.SelectedIndex));
                 UpdateExcludes();
             }
         }

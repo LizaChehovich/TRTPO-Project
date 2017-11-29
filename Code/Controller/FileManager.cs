@@ -27,12 +27,11 @@ namespace RSS_Reader.Controller
         public Profile GetUserProfile(string userName)
         {
             var xDocument = XDocument.Load(new StringReader(File.ReadAllText(GetPathToFile(userName))));
-            return new Profile
-            {
-                ResourcesList = XElementToInformationList(_rootName, _resourcesParameters, xDocument),
-                IncludeFiltersList = XElementToInformationList(_rootName, _includesParameters, xDocument),
-                ExcludeFiltersList = XElementToInformationList(_rootName, _excludesParameters, xDocument)
-            };
+            var profile = new Profile();
+            profile.AddResources(XElementToInformationList(_rootName, _resourcesParameters, xDocument));
+            profile.AddIncludeFilters(XElementToInformationList(_rootName, _includesParameters, xDocument));
+            profile.AddExcludeFilters(XElementToInformationList(_rootName, _excludesParameters, xDocument));
+            return profile;
         }
 
         public void SaveUserProfile(User user)
@@ -42,7 +41,7 @@ namespace RSS_Reader.Controller
                 GetXElement(_excludesParameters, user.Profile.ExcludeFiltersList))).Save(GetPathToFile(user.Name));
         }
 
-        private XElement GetXElement(string[] parameters, List<string> informationList)
+        private XElement GetXElement(string[] parameters, IReadOnlyCollection<string> informationList)
         {
             var xElement = new XElement(parameters[0]);
             foreach (var information in informationList)

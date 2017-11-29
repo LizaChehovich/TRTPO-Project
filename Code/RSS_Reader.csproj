@@ -49,7 +49,6 @@
     <Compile Include="Controller\FileManager.cs" />
     <Compile Include="Controller\Filtrator.cs" />
     <Compile Include="Controller\NewsLoader.cs" />
-    <Compile Include="Controller\ProfileManager.cs" />
     <Compile Include="Controller\RegistrationAndLoginManager.cs" />
     <Compile Include="Model\News.cs" />
     <Compile Include="Model\Profile.cs" />
