@@ -6,7 +6,14 @@ namespace RSS_Reader.Model
     {
         public string Name { get;}
         public Status Status { get;}
-        public Profile Profile { get; set; }
+
+        private Profile _profile;
+
+        public Profile Profile
+        {
+            get=> _profile;
+            set => _profile = value ?? new Profile();
+        }
 
         public User(string name, Status status, Profile profile)
         {
