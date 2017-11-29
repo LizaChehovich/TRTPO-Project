@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
@@ -39,14 +40,14 @@ namespace RSS_Reader.Controller
 
         private void CheckConnections()
         {
-            var status = IPStatus.Unknown;
+            IPStatus status;
             try
             {
                 status = new Ping().Send("google.com").Status;
             }
             catch (PingException )
             {
-                ExceptionTrown?.Invoke(@"Нет подключения к интернету. Повторить попытку?");
+                status = IPStatus.Unknown;
             }
             if (status != IPStatus.Success)
             {
@@ -57,7 +58,14 @@ namespace RSS_Reader.Controller
         private List<News> LoadNews(string resource)
         {
             var document = new XmlDocument();
-            document.Load(resource);
+            try
+            {
+                document.Load(resource);
+            }
+            catch (Exception)
+            {
+                return new List<News>();
+            }
             if (!document.InnerXml.Contains("rss")) return new List<News>();
             return document.InnerXml.Contains("version=\"1.0\"") ? ParseRss1(document) : ParseRss2(document);
         }
