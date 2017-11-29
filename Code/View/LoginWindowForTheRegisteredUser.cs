@@ -7,6 +7,7 @@ namespace RSS_Reader.View
     public partial class LoginWindowForTheRegisteredUser : Form
     {
         public delegate void UserInfoReadyHandler(User user);
+
         public event UserInfoReadyHandler UserInfoReady;
 
         private readonly RegistrationAndLoginManager _manager = new RegistrationAndLoginManager();
@@ -18,7 +19,7 @@ namespace RSS_Reader.View
             InitializeGui();
         }
 
-        private void InitializeGui() => lbUserName.Items.AddRange(_manager.GetUserNameList()?.ToArray());
+        private void InitializeGui() => lbUserName.Items.AddRange(_manager.UserNameList?.ToArray());
 
         private void HelpToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
@@ -45,9 +46,7 @@ namespace RSS_Reader.View
             Close();
         }
 
-        private void lbUserName_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
+        private void lbUserName_SelectedIndexChanged(object sender, System.EventArgs e) =>
             btOK.Enabled = lbUserName.SelectedIndex != -1;
-        }
     }
 }

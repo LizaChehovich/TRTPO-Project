@@ -15,14 +15,12 @@ namespace RSS_Reader.Controller
         private readonly string _relativeAddress = @"..\..\Users\";
         private readonly string _fileExtension = @".xml";
 
-        public List<string> GetUserNameList()
-        {
-            return (from filePath in Directory.GetFiles(_relativeAddress, @"*" + _fileExtension)
-                select Path.GetFileName(filePath)
-                into fileName
-                where !fileName.Equals("Anonym.xml")
-                select fileName.Remove(fileName.Length - _fileExtension.Length)).ToList();
-        }
+        public List<string> UserNameList =>
+        (from filePath in Directory.GetFiles(_relativeAddress, @"*" + _fileExtension)
+            select Path.GetFileName(filePath)
+            into fileName
+            where !fileName.Equals("Anonym.xml")
+            select fileName.Remove(fileName.Length - _fileExtension.Length)).ToList();
 
         public Profile GetUserProfile(string userName)
         {
@@ -34,12 +32,9 @@ namespace RSS_Reader.Controller
             return profile;
         }
 
-        public void SaveUserProfile(User user)
-        {
-            new XDocument(new XElement(_rootName, GetXElement(_resourcesParameters, user.Profile.ResourcesList),
+        public void SaveUserProfile(User user) => new XDocument(new XElement(_rootName, GetXElement(_resourcesParameters, user.Profile.ResourcesList),
                 GetXElement(_includesParameters, user.Profile.IncludeFiltersList),
                 GetXElement(_excludesParameters, user.Profile.ExcludeFiltersList))).Save(GetPathToFile(user.Name));
-        }
 
         private XElement GetXElement(string[] parameters, IReadOnlyCollection<string> informationList)
         {
@@ -51,18 +46,12 @@ namespace RSS_Reader.Controller
             return xElement;
         }
 
-        private List<string> XElementToInformationList(string rootName, string[] parameters, XDocument xDocument)
-        {
-            return xDocument.Elements(rootName)
+        private List<string> XElementToInformationList(string rootName, string[] parameters, XDocument xDocument) => xDocument.Elements(rootName)
                 .Elements(parameters[0])
                 .Elements(parameters[1])
                 .Select(informationElement => informationElement.Value)
                 .ToList();
-        }
 
-        private string GetPathToFile(string fileName)
-        {
-            return _relativeAddress + fileName + _fileExtension;
-        }
+        private string GetPathToFile(string fileName) => _relativeAddress + fileName + _fileExtension;
     }
 }

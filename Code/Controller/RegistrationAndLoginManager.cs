@@ -8,10 +8,9 @@ namespace RSS_Reader.Controller
     {
         private readonly FileManager _profileFileManager = new FileManager();
 
-        public List<string> GetUserNameList()
-        {
-            return _profileFileManager.GetUserNameList();
-        }
+        public List<string> UserNameList => _profileFileManager.UserNameList;
+
+        public User AnonymUser => GetUser(Status.Anonym.ToString(), Status.Anonym);
 
         public User RegisterUser(string userName)
         {
@@ -21,24 +20,10 @@ namespace RSS_Reader.Controller
             return user;
         }
 
-        public User LogIn(string userName)
-        {
-            return GetUser(userName, Status.Registered);
-        }
+        public User LogIn(string userName) => GetUser(userName, Status.Registered);
 
-        public User GetAnonymUser()
-        {
-            return GetUser(Status.Anonym.ToString(), Status.Anonym);
-        }
+        private User GetUser(string userName, Status status, string fileName = null) => new User(userName, status, _profileFileManager.GetUserProfile(fileName ?? userName));
 
-        private User GetUser(string userName, Status status, string fileName = null)
-        {
-            return new User(userName, status, _profileFileManager.GetUserProfile(fileName ?? userName));
-        }
-
-        private bool NameIsBusy(string name)
-        {
-            return _profileFileManager.GetUserNameList().Exists(x => x.Equals(name));
-        }
+        private bool NameIsBusy(string name) => _profileFileManager.UserNameList.Exists(x => x.Equals(name));
     }
 }

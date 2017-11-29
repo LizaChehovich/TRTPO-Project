@@ -38,7 +38,7 @@ namespace RSS_Reader.View
 
         private void btSkip_Click(object sender, System.EventArgs e)
         {
-            _user = new RegistrationAndLoginManager().GetAnonymUser();
+            _user = new RegistrationAndLoginManager().AnonymUser;
             Hide();
             ShowMainWindow();
         }

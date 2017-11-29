@@ -22,15 +22,9 @@ namespace RSS_Reader.Controller
         private readonly Regex _versionRegex = new Regex("(?<=version=\")(.{1})");
         private RssVersion _rssVersion;
 
-        private void ChangeRssVersion(int version)
-        {
-            _rssVersion = RssVersion.GetVersion(version);
-        }
+        private void ChangeRssVersion(int version) => _rssVersion = RssVersion.GetVersion(version);
 
-        public void UpdateUserProfile(Profile userProfile)
-        {
-            _userProfile = userProfile;
-        }
+        public void UpdateUserProfile(Profile userProfile) => _userProfile = userProfile;
 
         public void LoadNewses()
         {

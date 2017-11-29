@@ -45,9 +45,6 @@ namespace RSS_Reader.View
             Close();
         }
 
-        private void tbUserName_TextChanged(object sender, EventArgs e)
-        {
-            btOK.Enabled = tbUserName.Text.Length != 0;
-        }
+        private void tbUserName_TextChanged(object sender, EventArgs e) => btOK.Enabled = tbUserName.Text.Length != 0;
     }
 }

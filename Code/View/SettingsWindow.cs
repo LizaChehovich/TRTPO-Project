@@ -25,12 +25,7 @@ namespace RSS_Reader.View
             UpdateResources();
         }
 
-        private void ShowMessage(string message)
-        {
-
-            MessageBox.Show(message, @"Ошибка", MessageBoxButtons.OK);
-
-        }
+        private void ShowMessage(string message) => MessageBox.Show(message, @"Ошибка", MessageBoxButtons.OK);
 
         private void UpdateResources()
         {
@@ -62,10 +57,7 @@ namespace RSS_Reader.View
             Close();
         }
 
-        private void btAbort_Click(object sender, System.EventArgs e)
-        {
-            Close();
-        }
+        private void btAbort_Click(object sender, System.EventArgs e) => Close();
 
         private void btAddRes_Click(object sender, System.EventArgs e)
         {
