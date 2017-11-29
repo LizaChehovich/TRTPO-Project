@@ -67,14 +67,9 @@ namespace RSS_Reader.Controller
             var newsList = new List<News>();
             if (rss.FirstChild == null) return newsList;
             newsList.AddRange(from XmlNode item in rss.ChildNodes[1].FirstChild.SelectNodes("item")
-                select new News
-                {
-                    Title = item.SelectSingleNode("title")?.InnerText,
-                    Link = item.SelectSingleNode("link")?.InnerText,
-                    Description = _regex.Replace(item.SelectSingleNode("description").InnerText, ""),
-                    Category = item.SelectSingleNode("category")?.InnerText,
-                    PublicationDate = item.SelectSingleNode("pubDate")?.InnerText
-                });
+                select new News(item.SelectSingleNode("title")?.InnerText, item.SelectSingleNode("link")?.InnerText,
+                    _regex.Replace(item.SelectSingleNode("description").InnerText, ""),
+                    item.SelectSingleNode("category")?.InnerText, item.SelectSingleNode("pubDate")?.InnerText));
             return newsList;
         }
 
@@ -83,14 +78,9 @@ namespace RSS_Reader.Controller
             var newsList = new List<News>();
             if (rss.FirstChild == null) return newsList;
             newsList.AddRange(from XmlNode item in rss.FirstChild.FirstChild.SelectNodes("item")
-                select new News
-                {
-                    Title = item.SelectSingleNode("title")?.InnerText,
-                    Link = item.SelectSingleNode("link")?.InnerText,
-                    Description = _regex.Replace(item.SelectSingleNode("description").InnerText, ""),
-                    Category = item.SelectSingleNode("category")?.InnerText,
-                    PublicationDate = item.SelectSingleNode("pubDate")?.InnerText
-                });
+                select new News(item.SelectSingleNode("title")?.InnerText, item.SelectSingleNode("link")?.InnerText,
+                    _regex.Replace(item.SelectSingleNode("description").InnerText, ""),
+                    item.SelectSingleNode("category")?.InnerText, item.SelectSingleNode("pubDate")?.InnerText));
             return newsList;
         }
     }
