@@ -18,7 +18,22 @@ namespace RSS_Reader.Controller
 
         private Profile _userProfile;
         private Filtrator _filtrator;
-        private readonly Regex _regex = new Regex("\\<.*?\\>");
+        private readonly Regex _descriptionRegex = new Regex("\\<.*?\\>");
+        private readonly Regex _versionRegex = new Regex("(?<=version=\")(.{1})");
+        private IRssVersion _rssVersion;
+
+        private void ChangeRssVersion(int version)
+        {
+            switch (version)
+            {
+                case 1:
+                    _rssVersion = new RssVersion1();
+                    break;
+                default:
+                    _rssVersion = new RssVersion2();
+                    break;
+            }
+        }
 
         public void UpdateUserProfile(Profile userProfile)
         {
@@ -67,27 +82,16 @@ namespace RSS_Reader.Controller
                 return new List<News>();
             }
             if (!document.InnerXml.Contains("rss")) return new List<News>();
-            return document.InnerXml.Contains("version=\"1.0\"") ? ParseRss1(document) : ParseRss2(document);
+            ChangeRssVersion(Convert.ToInt32(_versionRegex.Match(document.InnerXml).Value));
+            return ParseRss(_rssVersion.GetNode(document));
         }
 
-        private List<News> ParseRss1(XmlDocument rss)
+        private List<News> ParseRss(XmlNode node)
         {
             var newsList = new List<News>();
-            if (rss.FirstChild == null) return newsList;
-            newsList.AddRange(from XmlNode item in rss.ChildNodes[1].FirstChild.SelectNodes("item")
+            newsList.AddRange(from XmlNode item in node?.SelectNodes("item")
                 select new News(item.SelectSingleNode("title")?.InnerText, item.SelectSingleNode("link")?.InnerText,
-                    _regex.Replace(item.SelectSingleNode("description").InnerText, ""),
-                    item.SelectSingleNode("category")?.InnerText, item.SelectSingleNode("pubDate")?.InnerText));
-            return newsList;
-        }
-
-        private List<News> ParseRss2(XmlDocument rss)
-        {
-            var newsList = new List<News>();
-            if (rss.FirstChild == null) return newsList;
-            newsList.AddRange(from XmlNode item in rss.FirstChild.FirstChild.SelectNodes("item")
-                select new News(item.SelectSingleNode("title")?.InnerText, item.SelectSingleNode("link")?.InnerText,
-                    _regex.Replace(item.SelectSingleNode("description").InnerText, ""),
+                    _descriptionRegex.Replace(item.SelectSingleNode("description")?.InnerText ?? string.Empty, ""),
                     item.SelectSingleNode("category")?.InnerText, item.SelectSingleNode("pubDate")?.InnerText));
             return newsList;
         }
