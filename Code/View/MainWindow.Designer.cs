@@ -177,9 +177,9 @@
             this.lbPubDate.AutoSize = true;
             this.lbPubDate.Location = new System.Drawing.Point(12, 413);
             this.lbPubDate.Name = "lbPubDate";
-            this.lbPubDate.Size = new System.Drawing.Size(131, 29);
+            this.lbPubDate.Size = new System.Drawing.Size(67, 29);
             this.lbPubDate.TabIndex = 4;
-            this.lbPubDate.Text = "Описание";
+            this.lbPubDate.Text = "Дата";
             // 
             // tbDescription
             // 
