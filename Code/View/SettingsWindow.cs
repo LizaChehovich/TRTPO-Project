@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using RSS_Reader.Model;
 
@@ -63,6 +64,11 @@ namespace RSS_Reader.View
         {
             var dataEntryWindow = new DataEntryWindow {Owner = this};
             if(dataEntryWindow.ShowDialog()==DialogResult.Abort) return;
+            if (!Uri.IsWellFormedUriString(Result, UriKind.Absolute))
+            {
+                ShowMessage(@"Данная строка не является интернет-ресурсом");
+                return;
+            }
             if (!_profile.AddResource(Result))
             {
                 ShowMessage(@"Такой ресурс уже есть");

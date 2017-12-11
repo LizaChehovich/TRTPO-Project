@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RSS_Reader.View
@@ -22,11 +15,15 @@ namespace RSS_Reader.View
 
         private void btOK_Click(object sender, EventArgs e)
         {
-            if (Owner is SettingsWindow settingsWindow) settingsWindow.Result = tbResult.Text;
             DialogResult = DialogResult.OK;
             Close();
         }
 
         private void btAbort_Click(object sender, EventArgs e) => Close();
+
+        private void DataEntryWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Owner is SettingsWindow settingsWindow) settingsWindow.Result = tbResult.Text;
+        }
     }
 }

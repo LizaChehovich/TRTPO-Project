@@ -76,6 +76,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "DataEntryWindow";
             this.Text = "Добавление элемента";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DataEntryWindow_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
