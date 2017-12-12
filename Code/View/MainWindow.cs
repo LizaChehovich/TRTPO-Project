@@ -18,6 +18,7 @@ namespace RSS_Reader.View
         private List<News> _newsList;
 
         private const int UpdateInterval = 900000;
+        private readonly Cursor _cursor = Cursor.Current;
 
         public MainWindow(User user)
         {
@@ -57,6 +58,7 @@ namespace RSS_Reader.View
 
         private void StartLoading()
         {
+            Cursor = Cursors.WaitCursor;
             _updateIsEnable = false;
             _loaderThread = new Thread(_loader.LoadNewses);
             _loader.UpdateUserProfile(_user.Profile);
@@ -75,6 +77,11 @@ namespace RSS_Reader.View
                 }
                 _updateIsEnable = true;
                 _loaderThread?.Abort();
+                Cursor = _cursor;
+                if (_newsList.Count == 0)
+                {
+                    MessageBox.Show(@"Нет новостей, удовлетворяющих всем настройкам", @"Ошибка");
+                }
             }
             else
             {
